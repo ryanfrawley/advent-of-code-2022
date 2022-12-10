@@ -5,9 +5,10 @@ mod day4;
 mod day5;
 mod day6;
 // mod day7;
+mod day10;
 mod day8;
 mod day9;
 
 fn main() {
-    day9::puzzle2::run();
+    day10::puzzle2::run();
 }
