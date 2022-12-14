@@ -84,6 +84,7 @@ pub fn run() {
     let lines = input.split('\n');
     let mut grid: Grid = Vec::new();
     let mut start: Point = (0, 0);
+    let mut traversed: Vec<Point> = Vec::new();
     let mut end: Point = (0, 0);
     let mut open: VecDeque<Point> = VecDeque::new();
     let mut closed: VecDeque<Point> = VecDeque::new();
@@ -140,7 +141,10 @@ pub fn run() {
             loop {
                 match temp.parent {
                     None => break,
-                    Some(p) => temp = &grid[p.0 as usize][p.1 as usize],
+                    Some(p) => {
+                        traversed.push(p);
+                        temp = &grid[p.0 as usize][p.1 as usize];
+                    }
                 }
                 steps += 1;
             }
@@ -188,6 +192,10 @@ pub fn run() {
             }
         }
     }
+    for i in 0..traversed.len() {
+        grid[traversed[i].0 as usize][traversed[i].1 as usize].c = '█';
+    }
+    print_grid(&grid);
 }
 
 #[cfg(test)]
